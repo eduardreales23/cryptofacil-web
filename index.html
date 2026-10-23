@@ -3,345 +3,444 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CryptoFácil</title>
+<meta name="theme-color" content="#07111f">
+<title>CryptoFácil | Detector de oportunidades</title>
 
 <style>
 :root {
-  --fondo: #0b1020;
-  --panel: #151d32;
-  --borde: #293653;
-  --texto: #f3f6ff;
-  --suave: #aebbd4;
-  --verde: #38e59b;
-  --azul: #63a7ff;
-  --rojo: #ff7777;
+  --fondo: #07111f;
+  --panel: #101e30;
+  --panel2: #17283c;
+  --texto: #f0f6ff;
+  --suave: #9aafc7;
+  --verde: #24e0a1;
+  --rojo: #ff647c;
+  --azul: #5aa9ff;
+  --amarillo: #ffd166;
 }
-
-* {
-  box-sizing: border-box;
-}
-
+* { box-sizing: border-box; }
 body {
   margin: 0;
-  padding: 16px;
   background: var(--fondo);
   color: var(--texto);
   font-family: Arial, sans-serif;
+  line-height: 1.5;
 }
-
+header {
+  padding: 24px 16px;
+  text-align: center;
+  background: linear-gradient(135deg,#102b48,#07111f);
+  border-bottom: 1px solid #243b55;
+}
+.logo {
+  font-size: 29px;
+  font-weight: 900;
+  letter-spacing: .5px;
+}
+.logo span { color: var(--verde); }
+header p {
+  max-width: 650px;
+  margin: 8px auto 0;
+  color: var(--suave);
+  font-size: 14px;
+}
 .contenedor {
-  max-width: 720px;
+  width: 100%;
+  max-width: 900px;
+  padding: 15px;
   margin: auto;
 }
-
-header {
-  text-align: center;
-  padding: 15px 0 20px;
-}
-
-.logo {
-  font-size: 42px;
-}
-
-h1 {
-  margin: 8px 0;
-  font-size: 30px;
-}
-
-header p {
-  color: var(--suave);
-  line-height: 1.5;
-}
-
 .panel {
   background: var(--panel);
-  border: 1px solid var(--borde);
+  border: 1px solid #243b55;
   border-radius: 16px;
-  padding: 18px;
+  padding: 16px;
   margin-bottom: 15px;
+  box-shadow: 0 5px 18px #0002;
 }
-
 h2 {
   font-size: 19px;
-  margin-top: 0;
+  margin: 0 0 12px;
 }
-
+h3 {
+  font-size: 16px;
+  margin: 0 0 8px;
+}
+p { margin-top: 6px; }
+.pequeno {
+  font-size: 12px;
+  color: var(--suave);
+}
+.fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+.campo {
+  flex: 1 1 135px;
+  min-width: 0;
+}
 label {
   display: block;
-  margin: 14px 0 7px;
   color: var(--suave);
+  font-size: 12px;
+  margin: 7px 0 5px;
+}
+input, select {
+  width: 100%;
+  min-height: 43px;
+  padding: 10px;
+  background: #081625;
+  color: var(--texto);
+  border: 1px solid #304861;
+  border-radius: 9px;
   font-size: 14px;
 }
-
-select, input {
-  width: 100%;
-  padding: 13px;
-  border: 1px solid var(--borde);
-  border-radius: 10px;
-  background: #0c1427;
-  color: white;
-  font-size: 16px;
-}
-
 button {
-  width: 100%;
-  padding: 13px;
-  margin-top: 10px;
   border: 0;
   border-radius: 10px;
+  padding: 12px 15px;
+  min-height: 43px;
   background: var(--verde);
-  color: #07180f;
-  font-weight: bold;
-  font-size: 15px;
+  color: #06251c;
+  font-weight: 800;
   cursor: pointer;
+  font-size: 14px;
 }
-
 button.secundario {
-  background: #263956;
-  color: white;
+  background: #243b55;
+  color: var(--texto);
+  border: 1px solid #3a536e;
 }
-
-button:disabled {
-  opacity: .65;
-  cursor: wait;
+button.peligro {
+  background: #542536;
+  color: #ffdbe1;
 }
-
-.resultado {
-  margin-top: 14px;
-  padding: 14px;
-  background: #0c1427;
-  border-radius: 10px;
-  line-height: 1.6;
+button:disabled { opacity: .5; }
+.botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.aviso {
+  border-left: 4px solid var(--amarillo);
+  background: #302a19;
+  color: #ffedbd;
+  padding: 11px;
+  border-radius: 7px;
+  font-size: 12px;
+  margin: 10px 0;
+}
+.estado {
+  color: var(--suave);
+  font-size: 13px;
+  margin-top: 10px;
+}
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.moneda {
+  background: var(--panel2);
+  border: 1px solid #2c435d;
+  border-radius: 12px;
+  padding: 13px;
   overflow-wrap: anywhere;
 }
-
-.precio {
-  font-size: 28px;
-  font-weight: bold;
+.moneda .nombre {
+  font-size: 16px;
+  font-weight: 800;
+}
+.moneda .precio {
+  font-size: 20px;
+  font-weight: 800;
   margin: 8px 0;
 }
-
-.verde {
-  color: var(--verde);
+.verde { color: var(--verde); }
+.rojo { color: var(--rojo); }
+.amarillo { color: var(--amarillo); }
+.azul { color: var(--azul); }
+.etiqueta {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  background: #263c53;
+  margin: 3px 3px 3px 0;
 }
-
-.rojo {
-  color: var(--rojo);
+hr {
+  border: 0;
+  border-top: 1px solid #293d54;
+  margin: 14px 0;
 }
-
-.suave {
-  color: var(--suave);
-}
-
-.tarjeta {
-  padding: 13px;
-  margin-top: 10px;
-  border: 1px solid var(--borde);
-  border-radius: 10px;
-  line-height: 1.5;
-}
-
-a {
-  color: var(--azul);
-  overflow-wrap: anywhere;
-}
-
-.nota {
-  color: var(--suave);
-  font-size: 12px;
-  line-height: 1.6;
-}
-
-.estado {
-  font-size: 14px;
-  margin-top: 10px;
-  color: var(--suave);
-}
-
+.oculto { display: none !important; }
 footer {
   text-align: center;
-  color: var(--suave);
+  padding: 20px;
   font-size: 12px;
-  padding: 12px;
+  color: var(--suave);
 }
-
+a { color: var(--azul); }
+.numero {
+  font-size: 24px;
+  font-weight: 900;
+}
+@media(max-width:480px) {
+  .contenedor { padding: 10px; }
+  .panel { padding: 13px; }
+  .logo { font-size: 25px; }
+  button { flex: 1 1 auto; }
+}
 </style>
 </head>
 
 <body>
-<div class="contenedor">
-
 <header>
-  <div class="logo">🚀</div>
-  <h1>CryptoFácil</h1>
-  <p>
-    Aprende a analizar criptomonedas, descubrir proyectos
-    y estudiar posibles oportunidades de mercado.
-  </p>
+  <div class="logo">🚀 Crypto<span>Fácil</span></div>
+  <p>Explora criptomonedas, detecta posibles oportunidades y aprende a gestionar el riesgo desde tu celular.</p>
 </header>
 
-<section class="panel">
-  <h2>💰 1. Consultar precio</h2>
+<main class="contenedor">
 
-  <label for="moneda">Selecciona una criptomoneda</label>
-  <select id="moneda">
+<section class="panel">
+  <h2>📡 Estado del detector</h2>
+  <div class="fila">
+    <div class="campo">
+      <div class="pequeno">Estado</div>
+      <div id="estadoGeneral" class="numero amarillo">Preparado</div>
+    </div>
+    <div class="campo">
+      <div class="pequeno">Última revisión</div>
+      <div id="ultimaRevision">Todavía no realizada</div>
+    </div>
+  </div>
+  <p id="estadoMensaje" class="estado">
+    Pulsa «Buscar oportunidades» para iniciar el análisis.
+  </p>
+  <div class="botones">
+    <button id="btnBuscar" onclick="buscarOportunidades()">
+      🔎 Buscar oportunidades
+    </button>
+    <button class="secundario" id="btnPausa" onclick="cambiarPausa()">
+      ⏸️ Pausar actualizaciones
+    </button>
+  </div>
+  <p class="pequeno">
+    La página revisa datos públicos cuando está abierta. No funciona en segundo plano si el navegador la cierra.
+  </p>
+</section>
+
+<section class="panel">
+  <h2>🌐 Configurar redes</h2>
+  <p class="pequeno">Elige una red para filtrar los resultados disponibles.</p>
+
+  <label for="red">Red blockchain</label>
+  <select id="red">
+    <option value="todas">Todas las redes disponibles</option>
+    <option value="solana">Solana</option>
+    <option value="base">Base</option>
+    <option value="bsc">BNB Chain</option>
+    <option value="ethereum">Ethereum</option>
+    <option value="robinhood">Robinhood Chain</option>
+  </select>
+
+  <div class="aviso">
+    Robinhood Chain está incluida en el selector, pero la disponibilidad de sus tokens depende de que la fuente pública de datos los indexe. No se mostrarán datos inventados si no aparecen resultados.
+  </div>
+</section>
+
+<section class="panel">
+  <h2>🛡️ Filtros de riesgo</h2>
+  <p class="pequeno">
+    Estos filtros ayudan a descartar algunos tokens de riesgo elevado, pero no garantizan que un proyecto sea seguro.
+  </p>
+
+  <div class="fila">
+    <div class="campo">
+      <label for="liquidezMin">Liquidez mínima en USD</label>
+      <select id="liquidezMin">
+        <option value="1000">$1.000</option>
+        <option value="5000" selected>$5.000</option>
+        <option value="10000">$10.000</option>
+        <option value="25000">$25.000</option>
+        <option value="50000">$50.000</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label for="volumenMin">Volumen 24 h mínimo</label>
+      <select id="volumenMin">
+        <option value="1000">$1.000</option>
+        <option value="5000" selected>$5.000</option>
+        <option value="10000">$10.000</option>
+        <option value="25000">$25.000</option>
+        <option value="50000">$50.000</option>
+      </select>
+    </div>
+  </div>
+
+  <p class="pequeno">
+    Una liquidez baja puede dificultar la venta. Un volumen elevado tampoco garantiza que puedas vender al precio esperado.
+  </p>
+</section>
+
+<section class="panel">
+  <h2>🔎 Buscar una criptomoneda</h2>
+  <p class="pequeno">
+    Busca por nombre, símbolo o dirección del contrato. También puedes probar términos como gaming.
+  </p>
+
+  <label for="busqueda">¿Qué token quieres investigar?</label>
+  <input id="busqueda" type="text" placeholder="Ej.: gaming, PEPE o dirección del contrato">
+
+  <div class="botones">
+    <button onclick="buscarToken()">Buscar token</button>
+    <button class="secundario" onclick="buscarToken('gaming')">🎮 Proyectos gaming</button>
+  </div>
+
+  <div id="estadoBusqueda" class="estado"></div>
+  <div id="resultadosBusqueda" class="tarjetas"></div>
+</section>
+
+<section class="panel">
+  <h2>🚨 Posibles oportunidades</h2>
+  <p class="pequeno">
+    Resultados orientativos calculados a partir de datos públicos de mercado. No son recomendaciones financieras.
+  </p>
+  <div id="resultadosOportunidades" class="tarjetas"></div>
+  <div id="estadoOportunidades" class="estado">
+    Pulsa «Buscar oportunidades» para revisar los datos disponibles.
+  </div>
+</section>
+
+<section class="panel">
+  <h2>💰 Consultar precios</h2>
+  <p class="pequeno">Consulta precios de criptomonedas conocidas en dólares estadounidenses.</p>
+
+  <label for="monedaPrecio">Criptomoneda</label>
+  <select id="monedaPrecio">
     <option value="bitcoin">Bitcoin (BTC)</option>
     <option value="ethereum">Ethereum (ETH)</option>
     <option value="solana">Solana (SOL)</option>
     <option value="binancecoin">BNB</option>
     <option value="ripple">XRP</option>
     <option value="dogecoin">Dogecoin (DOGE)</option>
-    <option value="the-open-network">Toncoin (TON)</option>
-    <option value="avalanche-2">Avalanche (AVAX)</option>
-    <option value="chainlink">Chainlink (LINK)</option>
-    <option value="sui">Sui (SUI)</option>
   </select>
 
-  <button id="btnPrecio" onclick="consultarPrecio()">
-    Consultar precio
-  </button>
-
-  <div id="resultadoPrecio" class="resultado">
-    Selecciona una moneda y pulsa consultar.
+  <div class="botones">
+    <button onclick="consultarPrecio()">Consultar precio</button>
   </div>
+  <div id="resultadoPrecio" class="estado"></div>
 </section>
 
 <section class="panel">
-  <h2>📊 2. Analizar una moneda</h2>
-
-  <p class="suave">
-    Consulta el precio, la variación diaria y el volumen para
-    comenzar a evaluar el comportamiento del mercado.
+  <h2>🧪 Simulador de operaciones</h2>
+  <p class="pequeno">
+    Practica con dinero ficticio antes de arriesgar dinero real. Este simulador no conecta tu billetera ni ejecuta compras reales.
   </p>
 
-  <button id="btnAnalisis" class="secundario"
-    onclick="analizarMoneda()">
-    Analizar mercado
-  </button>
-
-  <div id="resultadoAnalisis" class="resultado">
-    El análisis aparecerá aquí.
-  </div>
-</section>
-
-<section class="panel">
-  <h2>🔎 3. Buscar nuevos proyectos</h2>
-
-  <label for="busqueda">Nombre o símbolo del token</label>
-  <input id="busqueda"
-    type="text"
-    placeholder="Ejemplo: BONK, PEPE, gaming..."
-    maxlength="100">
-
-  <label for="red">Red blockchain</label>
-  <select id="red">
-    <option value="all">Todas las redes</option>
-    <option value="solana">Solana</option>
-    <option value="base">Base</option>
-    <option value="bsc">BNB Chain</option>
-    <option value="ethereum">Ethereum</option>
-    <option value="arbitrum">Arbitrum</option>
-    <option value="optimism">Optimism</option>
-    <option value="polygon">Polygon</option>
-    <option value="hyperevm">HyperEVM</option>
-  </select>
-
-  <button id="btnBuscar" onclick="buscarProyectos()">
-    Buscar proyectos
-  </button>
-
-  <div id="resultadoBusqueda" class="resultado">
-    Aquí aparecerán los proyectos encontrados.
+  <div class="fila">
+    <div class="campo">
+      <label for="capitalInicial">Capital ficticio inicial (USD)</label>
+      <input id="capitalInicial" type="number" min="1" value="100">
+    </div>
+    <div class="campo">
+      <label for="montoOperacion">Monto de la operación (USD)</label>
+      <input id="montoOperacion" type="number" min="1" value="10">
+    </div>
   </div>
 
-  <p class="nota">
-    Robinhood Chain no está disponible como filtro independiente
-    en esta versión. HyperEVM es una red diferente: no la
-    selecciones como si fuera Robinhood Chain.
+  <div class="botones">
+    <button onclick="iniciarSimulador()">Iniciar / reiniciar</button>
+  </div>
+
+  <hr>
+
+  <div class="fila">
+    <div class="campo">
+      <div class="pequeno">Saldo disponible</div>
+      <div id="saldoSimulador" class="numero">$100.00</div>
+    </div>
+    <div class="campo">
+      <div class="pequeno">Resultado acumulado</div>
+      <div id="resultadoSimulador" class="numero">$0.00</div>
+    </div>
+  </div>
+
+  <label for="tokenSimulador">Símbolo del token</label>
+  <input id="tokenSimulador" type="text" placeholder="Ej.: BTC">
+
+  <label for="precioSimulador">Precio actual por token (USD)</label>
+  <input id="precioSimulador" type="number" min="0.00000001" step="any" placeholder="Consulta el precio antes">
+
+  <div class="botones">
+    <button onclick="comprarSimulado()">Comprar ficticiamente</button>
+    <button class="secundario" onclick="venderSimulado()">Vender posición ficticia</button>
+  </div>
+
+  <div id="estadoSimulador" class="estado"></div>
+  <div id="posicionesSimulador"></div>
+  <p class="pequeno">
+    Los resultados son simulados. No incluyen todos los costos, deslizamientos de precio ni impuestos que podrían existir en una operación real.
   </p>
 </section>
 
 <section class="panel">
-  <h2>🎓 4. Aprende a evaluar una oportunidad</h2>
+  <h2>🧠 Cómo interpretar las señales</h2>
 
-  <div class="tarjeta">
-    <strong>💧 Liquidez</strong>
-    <p class="suave">
-      Comprueba si existe suficiente liquidez para comprar y vender.
-      Una liquidez baja puede dificultar la salida de una operación.
-    </p>
-  </div>
+  <p><span class="etiqueta verde">Posible interés</span> El token supera algunos filtros de actividad y liquidez. No significa que vaya a subir.</p>
 
-  <div class="tarjeta">
-    <strong>📈 Volumen</strong>
-    <p class="suave">
-      Compara el volumen de negociación con la liquidez y observa
-      si hay actividad real en el mercado.
-    </p>
-  </div>
+  <p><span class="etiqueta amarillo">Esperar</span> Los datos no ofrecen una señal suficientemente clara con los criterios utilizados.</p>
 
-  <div class="tarjeta">
-    <strong>🛡️ Riesgo del contrato</strong>
-    <p class="suave">
-      Investiga si el contrato permite restricciones de venta,
-      cambios de comisiones u otras funciones peligrosas.
-      Un resultado favorable no garantiza que un token sea seguro.
-    </p>
-  </div>
+  <p><span class="etiqueta" style="background:#542536;color:#ffdbe1">Riesgo elevado</span> Hay datos que aconsejan cautela, como liquidez insuficiente o una caída pronunciada.</p>
 
-  <div class="tarjeta">
-    <strong>🚪 Plan de salida</strong>
-    <p class="suave">
-      Antes de comprar, define cuánto estás dispuesto a perder
-      y en qué condiciones cerrarías la operación.
-    </p>
+  <div class="aviso">
+    Ningún sistema puede garantizar un porcentaje de ganancias del 85 %. Los tokens nuevos y de baja capitalización pueden perder gran parte de su valor, tener poca liquidez o ser fraudulentos.
   </div>
 </section>
 
 <section class="panel">
-  <h2>ℹ️ Estado de CryptoFácil</h2>
-  <div id="estadoGeneral" class="estado">
-    Preparado para consultar datos.
-  </div>
-  <p class="nota">
-    Los datos dependen de servicios externos y de tu conexión.
-    Esta herramienta es educativa: no garantiza beneficios,
-    no calcula una probabilidad fiable de ganar y no ejecuta
-    compras ni ventas reales.
+  <h2>⛓️ Robinhood Chain</h2>
+  <p>
+    CryptoFácil incluye Robinhood Chain en el selector de redes. La detección efectiva depende de que la fuente de datos ofrezca pares de negociación para esa red.
   </p>
+  <p class="pequeno">
+    No conectes tu billetera ni compartas frases de recuperación o claves privadas para utilizar este detector.
+  </p>
+  <a href="https://explorer
+    explorer.testnet.chain.robinhood.com/" target="_blank" rel="noopener noreferrer">
+    Consultar explorador de Robinhood Chain
+  </a>
 </section>
+
+</main>
 
 <footer>
-  CryptoFácil · Herramienta educativa de criptomonedas
+  CryptoFácil · Herramienta educativa de análisis de mercado.<br>
+  Los datos pueden retrasarse o estar incompletos. Investiga antes de tomar decisiones.
 </footer>
+  <script>
+"use strict";
 
-</div>
+const DEX = "https://api.dexscreener.com";
+const CG = "https://api.coingecko.com/api/v3";
 
-<script>
-const API_CG = "https://api.coingecko.com/api/v3";
-const API_DEX = "https://api.dexscreener.com/latest/dex";
+let pausado = false;
+let temporizador = null;
+let saldo = 100;
+let posiciones = {};
+let historial = [];
 
-function elemento(id) {
+function porId(id) {
   return document.getElementById(id);
 }
 
-function escapar(texto) {
-  return String(texto ?? "").replace(/[&<>"']/g, function(c) {
-    return {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    }[c];
-  });
-}
-
 function dinero(valor) {
-  if (valor === null || valor === undefined || !Number.isFinite(Number(valor))) {
-    return "No disponible";
-  }
-
+  if (!Number.isFinite(Number(valor))) return "No disponible";
   return Number(valor).toLocaleString("en-US", {
     style: "currency",
     currency: "USD",
@@ -350,344 +449,570 @@ function dinero(valor) {
 }
 
 function numero(valor) {
-  if (valor === null || valor === undefined || !Number.isFinite(Number(valor))) {
-    return "No disponible";
-  }
-
-  return Number(valor).toLocaleString("en-US", {
-    maximumFractionDigits: 2
-  });
-}
-
-function porcentaje(valor) {
-  if (valor === null || valor === undefined || !Number.isFinite(Number(valor))) {
-    return "No disponible";
-  }
-
   const n = Number(valor);
-  const signo = n > 0 ? "+" : "";
-
-  return signo + n.toFixed(2) + "%";
+  return Number.isFinite(n)
+    ? n.toLocaleString("en-US", { maximumFractionDigits: 2 })
+    : "—";
 }
 
-async function obtenerJSON(url, tiempo = 10000) {
+function escapar(valor) {
+  return String(valor ?? "").replace(/[&<>"']/g, c => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[c]);
+}
+
+async function getJSON(url) {
   const controlador = new AbortController();
-  const temporizador = setTimeout(
-    () => controlador.abort(),
-    tiempo
-  );
+  const reloj = setTimeout(() => controlador.abort(), 12000);
 
   try {
     const respuesta = await fetch(url, {
-      method: "GET",
-      cache: "no-store",
       signal: controlador.signal,
-      headers: {
-        "Accept": "application/json"
-      }
+      headers: { Accept: "application/json" }
     });
 
     if (!respuesta.ok) {
-      if (respuesta.status === 429) {
-        throw new Error(
-          "El servicio está recibiendo muchas consultas. Espera un minuto."
-        );
-      }
-
-      throw new Error(
-        "El servicio respondió con error HTTP " + respuesta.status + "."
-      );
+      throw new Error("Error HTTP " + respuesta.status);
     }
 
     return await respuesta.json();
-
-  } catch (error) {
-    if (error.name === "AbortError") {
-      throw new Error(
-        "La consulta tardó demasiado. Comprueba tu conexión e inténtalo otra vez."
-      );
-    }
-
-    throw error;
-
   } finally {
-    clearTimeout(temporizador);
+    clearTimeout(reloj);
   }
 }
 
-function mensajeError(error) {
-  return escapar(error?.message || "No se pudo completar la consulta.");
+function redNombre(id) {
+  const nombres = {
+    solana: "Solana",
+    base: "Base",
+    bsc: "BNB Chain",
+    ethereum: "Ethereum",
+    robinhood: "Robinhood Chain"
+  };
+
+  return nombres[id] || id || "Red desconocida";
 }
 
-async function conBoton(id, texto, funcion) {
-  const boton = elemento(id);
-  const original = boton.textContent;
+function evaluarToken(par) {
+  const liquidez = Number(par?.liquidity?.usd || 0);
+  const volumen = Number(par?.volume?.h24 || 0);
+  const cambio = Number(par?.priceChange?.h24 || 0);
+  const compras = Number(par?.txns?.h24?.buys || 0);
+  const ventas = Number(par?.txns?.h24?.sells || 0);
 
-  if (boton.disabled) return;
+  const minLiquidez = Number(porId("liquidezMin").value);
+  const minVolumen = Number(porId("volumenMin").value);
 
+  let puntos = 0;
+  const razones = [];
+
+  if (liquidez >= minLiquidez) {
+    puntos += 2;
+    razones.push("Liquidez suficiente según el filtro");
+  } else {
+    puntos -= 3;
+    razones.push("Liquidez baja");
+  }
+
+  if (volumen >= minVolumen) {
+    puntos += 2;
+    razones.push("Volumen suficiente según el filtro");
+  } else {
+    puntos -= 2;
+    razones.push("Volumen bajo");
+  }
+
+  if (cambio > 0 && cambio <= 15) {
+    puntos += 1;
+    razones.push("Variación positiva moderada");
+  } else if (cambio > 15) {
+    puntos -= 1;
+    razones.push("Subida rápida: posible volatilidad");
+  } else if (cambio < -15) {
+    puntos -= 2;
+    razones.push("Caída pronunciada");
+  } else {
+    razones.push("Sin impulso claro");
+  }
+
+  if (compras + ventas >= 20 && compras > ventas) {
+    puntos += 1;
+    razones.push("Más compras que ventas");
+  } else if (compras + ventas >= 20 && ventas > compras * 1.5) {
+    puntos -= 1;
+    razones.push("Predominan las ventas");
+  }
+
+  let senal;
+  let clase;
+
+  if (liquidez < 1000 || volumen < 500) {
+    senal = "RIESGO ELEVADO";
+    clase = "rojo";
+  } else if (puntos >= 4) {
+    senal = "POSIBLE INTERÉS";
+    clase = "verde";
+  } else if (puntos <= -2) {
+    senal = "RIESGO / EVITAR";
+    clase = "rojo";
+  } else {
+    senal = "ESPERAR";
+    clase = "amarillo";
+  }
+
+  return {
+    puntos,
+    senal,
+    clase,
+    razones,
+    liquidez,
+    volumen,
+    cambio,
+    compras,
+    ventas,
+    precio: Number(par?.priceUsd || 0)
+  };
+}
+
+function tarjetaToken(par, origen) {
+  const base = par.baseToken || {};
+  const e = evaluarToken(par);
+  const direccion = base.address || "";
+  const url = par.url || "https://dexscreener.com/";
+
+  const motivos = e.razones.map(r =>
+    `<span class="etiqueta">${escapar(r)}</span>`
+  ).join("");
+
+  return `
+    <article class="moneda">
+      <div class="nombre">
+        ${escapar(base.name || "Token")}
+        (${escapar(base.symbol || "?")})
+      </div>
+
+      <div class="pequeno">${escapar(redNombre(par.chainId))}</div>
+
+      <div class="precio">${dinero(e.precio)}</div>
+
+      <span class="etiqueta ${e.clase}">
+        ${escapar(e.senal)}
+      </span>
+
+      <span class="etiqueta">Puntuación ${e.puntos}</span>
+
+      <hr>
+
+      <div class="pequeno">Liquidez: ${dinero(e.liquidez)}</div>
+      <div class="pequeno">Volumen 24 h: ${dinero(e.volumen)}</div>
+      <div class="pequeno">
+        Cambio 24 h:
+        <span class="${e.cambio >= 0 ? "verde" : "rojo"}">
+          ${numero(e.cambio)}%
+        </span>
+      </div>
+
+      <div class="pequeno">
+        Compras: ${numero(e.compras)} · Ventas: ${numero(e.ventas)}
+      </div>
+
+      <div style="margin-top:8px">${motivos}</div>
+
+      <p class="pequeno">
+        Contrato: ${escapar(direccion || "No disponible")}
+      </p>
+
+      <div class="botones">
+        <button class="secundario"
+          onclick="usarEnSimulador('${escapar(base.symbol || "")}', ${e.precio})">
+          Simular
+        </button>
+        <a href="${escapar(url)}" target="_blank" rel="noopener noreferrer">
+          Ver mercado
+        </a>
+      </div>
+
+      <p class="pequeno">
+        Origen: ${escapar(origen)}. Esta señal no predice el precio futuro.
+      </p>
+    </article>`;
+}
+
+function filtrarRed(par) {
+  const red = porId("red").value;
+  return red === "todas" || par.chainId === red;
+}
+
+function pasaFiltros(par) {
+  const e = evaluarToken(par);
+
+  return e.liquidez >= Number(porId("liquidezMin").value) &&
+    e.volumen >= Number(porId("volumenMin").value);
+}
+
+async function buscarOportunidades() {
+  if (pausado) {
+    porId("estadoOportunidades").textContent =
+      "Actualizaciones pausadas. Pulsa Reanudar para continuar.";
+    return;
+  }
+
+  const boton = porId("btnBuscar");
   boton.disabled = true;
-  boton.textContent = "⏳ Consultando...";
 
-  elemento("estadoGeneral").textContent =
-    "Consultando el servicio de datos...";
+  porId("estadoGeneral").textContent = "Buscando…";
+  porId("estadoMensaje").textContent =
+    "Consultando tokens recientes y destacados.";
+  porId("estadoOportunidades").textContent =
+    "Buscando datos públicos…";
 
   try {
-    await funcion();
+    const respuestas = await Promise.allSettled([
+      getJSON(DEX + "/token-profiles/latest/v1"),
+      getJSON(DEX + "/token-boosts/latest/v1")
+    ]);
 
-    elemento("estadoGeneral").textContent =
-      "Consulta finalizada.";
+    let candidatos = [];
+
+    for (const r of respuestas) {
+      if (r.status === "fulfilled" && Array.isArray(r.value)) {
+        candidatos.push(...r.value);
+      }
+    }
+
+    const unicos = new Map();
+
+    for (const token of candidatos) {
+      if (!token.chainId || !token.tokenAddress) continue;
+      if (!filtrarRed(token)) continue;
+
+      unicos.set(
+        token.chainId + ":" + token.tokenAddress,
+        token
+      );
+    }
+
+    const lista = Array.from(unicos.values()).slice(0, 12);
+
+    if (!lista.length) {
+      porId("resultadosOportunidades").innerHTML = "";
+      porId("estadoOportunidades").textContent =
+        "No hay candidatos disponibles para esta red. Prueba Todas las redes.";
+      porId("estadoGeneral").textContent = "Sin resultados";
+      return;
+    }
+
+    const respuestasPares = await Promise.allSettled(
+      lista.map(async token => {
+        const url = DEX + "/token-pairs/v1/" +
+          encodeURIComponent(token.chainId) + "/" +
+          encodeURIComponent(token.tokenAddress);
+
+        const pares = await getJSON(url);
+
+        if (!Array.isArray(pares)) return null;
+
+        return pares
+          .filter(p => p && p.chainId === token.chainId)
+          .sort((a, b) =>
+            Number(b?.liquidity?.usd || 0) -
+            Number(a?.liquidity?.usd || 0)
+          )[0] || null;
+      })
+    );
+
+    let pares = respuestasPares
+      .filter(r => r.status === "fulfilled" && r.value)
+      .map(r => r.value)
+      .filter(pasaFiltros);
+
+    pares.sort((a, b) =>
+      evaluarToken(b).puntos - evaluarToken(a).puntos
+    );
+
+    porId("resultadosOportunidades").innerHTML =
+      pares.map(p => tarjetaToken(p, "detector")).join("");
+
+    porId("estadoOportunidades").textContent = pares.length
+      ? `Se encontraron ${pares.length} tokens que superan los filtros.`
+      : "Ningún token superó los filtros seleccionados.";
+
+    porId("estadoGeneral").textContent =
+      pares.length ? "Análisis listo" : "Sin coincidencias";
+
+    porId("estadoMensaje").textContent =
+      "Análisis terminado. No garantiza ganancias.";
 
   } catch (error) {
-    console.error(error);
-
-    elemento("estadoGeneral").textContent =
-      "No se pudo completar la consulta.";
-
+    porId("estadoGeneral").textContent = "Error de datos";
+    porId("estadoMensaje").textContent =
+      "No se pudo consultar la fuente. Comprueba tu conexión.";
+    porId("estadoOportunidades").textContent =
+      "Inténtalo nuevamente más tarde.";
   } finally {
+    porId("ultimaRevision").textContent =
+      new Date().toLocaleString();
+
     boton.disabled = false;
-    boton.textContent = original;
+  }
+}
+
+async function buscarToken(valorForzado) {
+  const consulta = String(
+    valorForzado || porId("busqueda").value || ""
+  ).trim();
+
+  if (!consulta) {
+    porId("estadoBusqueda").textContent =
+      "Escribe el nombre, símbolo, contrato o gaming.";
+    return;
+  }
+
+  porId("estadoBusqueda").textContent = "Buscando…";
+  porId("resultadosBusqueda").innerHTML = "";
+
+  try {
+    const datos = await getJSON(
+      DEX + "/latest/dex/search?q=" +
+      encodeURIComponent(consulta)
+    );
+
+    let pares = Array.isArray(datos.pairs) ? datos.pairs : [];
+
+    pares = pares.filter(filtrarRed);
+
+    pares.sort((a, b) =>
+      Number(b?.liquidity?.usd || 0) -
+      Number(a?.liquidity?.usd || 0)
+    );
+
+    const mostrar = pares.slice(0, 10);
+
+    porId("resultadosBusqueda").innerHTML =
+      mostrar.map(p => tarjetaToken(p, "búsqueda")).join("");
+
+    porId("estadoBusqueda").textContent = mostrar.length
+      ? `Se encontraron ${mostrar.length} resultados. Verifica cada contrato.`
+      : "No se encontraron resultados para esa búsqueda y red.";
+
+  } catch (error) {
+    porId("estadoBusqueda").textContent =
+      "No fue posible consultar los datos. Inténtalo de nuevo.";
   }
 }
 
 async function consultarPrecio() {
-  await conBoton("btnPrecio", "Consultar precio", async function() {
-    const id = elemento("moneda").value;
-    const salida = elemento("resultadoPrecio");
+  const id = porId("monedaPrecio").value;
+  porId("resultadoPrecio").textContent = "Consultando…";
 
-    salida.innerHTML = "Buscando precio...";
+  try {
+    const datos = await getJSON(
+      CG + "/simple/price?ids=" +
+      encodeURIComponent(id) +
+      "&vs_currencies=usd&include_24hr_change=true"
+    );
 
-    try {
-      const url = API_CG +
-        "/simple/price?ids=" + encodeURIComponent(id) +
-        "&vs_currencies=usd&include_24hr_change=true";
-
-      const datos = await obtenerJSON(url);
-      const moneda = datos[id];
-
-      if (!moneda || moneda.usd === undefined) {
-        throw new Error("No se recibió el precio de esta moneda.");
-      }
-
-      const cambio = moneda.usd_24h_change;
-      const clase = Number(cambio) >= 0 ? "verde" : "rojo";
-
-      salida.innerHTML = `
-        <div class="suave">Precio actual aproximado</div>
-        <div class="precio">${dinero(moneda.usd)}</div>
-        <div>
-          Variación de 24 horas:
-          <strong class="${clase}">
-            ${porcentaje(cambio)}
-          </strong>
-        </div>
-        <p class="nota">
-          Datos de CoinGecko. El precio puede cambiar rápidamente.
-        </p>
-      `;
-
-    } catch (error) {
-      salida.innerHTML = `
-        <strong class="rojo">No se pudo consultar el precio.</strong>
-        <p>${mensajeError(error)}</p>
-        <p class="nota">
-          Si el servicio limita las consultas, espera un poco
-          antes de intentarlo de nuevo.
-        </p>
-      `;
-
-      throw error;
+    if (!datos[id] || typeof datos[id].usd !== "number") {
+      throw new Error("Precio no disponible");
     }
-  });
+
+    const precio = datos[id].usd;
+    const cambio = Number(datos[id].usd_24h_change || 0);
+
+    porId("resultadoPrecio").innerHTML = `
+      <div class="numero">${dinero(precio)}</div>
+      <div class="${cambio >= 0 ? "verde" : "rojo"}">
+        Cambio 24 h: ${numero(cambio)}%
+      </div>
+      <p class="pequeno">
+        Fuente: CoinGecko. Precio indicativo.
+      </p>`;
+  } catch (error) {
+    porId("resultadoPrecio").textContent =
+      "No se pudo obtener el precio. Inténtalo más tarde.";
+  }
 }
 
-async function analizarMoneda() {
-  await conBoton("btnAnalisis", "Analizar mercado", async function() {
-    const id = elemento("moneda").value;
-    const salida = elemento("resultadoAnalisis");
+function iniciarSimulador() {
+  const inicial = Number(porId("capitalInicial").value);
 
-    salida.innerHTML = "Analizando datos del mercado...";
+  if (!Number.isFinite(inicial) || inicial <= 0) {
+    porId("estadoSimulador").textContent =
+      "Introduce un capital ficticio mayor que cero.";
+    return;
+  }
 
-    try {
-      const url = API_CG +
-        "/coins/markets?vs_currency=usd&ids=" +
-        encodeURIComponent(id) +
-        "&price_change_percentage=24h";
+  saldo = inicial;
+  posiciones = {};
+  historial = [];
 
-      const datos = await obtenerJSON(url);
+  actualizarSimulador();
 
-      if (!Array.isArray(datos) || !datos.length) {
-        throw new Error("No hay datos de mercado disponibles.");
-      }
-
-      const moneda = datos[0];
-      const cambio = Number(moneda.price_change_percentage_24h);
-      const volumen = Number(moneda.total_volume || 0);
-      const capitalizacion = Number(moneda.market_cap || 0);
-
-      let lectura = "Movimiento mixto o sin datos suficientes.";
-
-      if (Number.isFinite(cambio) && cambio >= 3) {
-        lectura = "Movimiento positivo durante las últimas 24 horas. Revisa si el precio ya subió demasiado.";
-      } else if (Number.isFinite(cambio) && cambio > 0) {
-        lectura = "Subida moderada durante las últimas 24 horas. Confirma la tendencia antes de decidir.";
-      } else if (Number.isFinite(cambio) && cambio <= -3) {
-        lectura = "Caída importante durante las últimas 24 horas. Puede implicar un riesgo elevado.";
-      } else if (Number.isFinite(cambio) && cambio < 0) {
-        lectura = "Movimiento negativo durante las últimas 24 horas. Busca más contexto antes de operar.";
-      }
-
-      const clase = cambio >= 0 ? "verde" : "rojo";
-
-      salida.innerHTML = `
-        <h3>${escapar(moneda.name)} (${escapar(moneda.symbol.toUpperCase())})</h3>
-        <div class="precio">${dinero(moneda.current_price)}</div>
-
-        <p>
-          Variación 24 h:
-          <strong class="${clase}">${porcentaje(cambio)}</strong>
-        </p>
-
-        <p>Capitalización: ${dinero(capitalizacion)}</p>
-        <p>Volumen 24 h: ${dinero(volumen)}</p>
-        <p>Rango del día: ${dinero(moneda.low_24h)} – ${dinero(moneda.high_24h)}</p>
-
-        <div class="tarjeta">
-          <strong>Lectura inicial</strong>
-          <p>${escapar(lectura)}</p>
-        </div>
-
-        <p class="nota">
-          Esta lectura utiliza principalmente la variación diaria.
-          No es una señal fiable de compra o venta ni una predicción
-          de rentabilidad.
-        </p>
-      `;
-
-    } catch (error) {
-      salida.innerHTML = `
-        <strong class="rojo">No se pudo completar el análisis.</strong>
-        <p>${mensajeError(error)}</p>
-      `;
-
-      throw error;
-    }
-  });
+  porId("estadoSimulador").textContent =
+    "Simulador reiniciado. No se ha utilizado dinero real.";
 }
 
-async function buscarProyectos() {
-  await conBoton("btnBuscar", "Buscar proyectos", async function() {
-    const consulta = elemento("busqueda").value.trim();
-    const red = elemento("red").value;
-    const salida = elemento("resultadoBusqueda");
+function comprarSimulado() {
+  const monto = Number(porId("montoOperacion").value);
+  const precio = Number(porId("precioSimulador").value);
+  const simbolo = String(
+    porId("tokenSimulador").value || ""
+  ).trim().toUpperCase();
 
-    if (!consulta) {
-      salida.innerHTML =
-        "Escribe el nombre o símbolo del token que quieres buscar.";
-      return;
-    }
+  if (!simbolo || !Number.isFinite(precio) || precio <= 0 ||
+      !Number.isFinite(monto) || monto <= 0) {
+    porId("estadoSimulador").textContent =
+      "Introduce símbolo, precio válido y monto.";
+    return;
+  }
 
-    salida.innerHTML = "Buscando pares de mercado...";
+  if (monto > saldo) {
+    porId("estadoSimulador").textContent =
+      "No tienes suficiente saldo ficticio.";
+    return;
+  }
 
-    try {
-      const url = API_DEX + "/search?q=" +
-        encodeURIComponent(consulta);
+  const cantidad = monto / precio;
 
-      const datos = await obtenerJSON(url, 12000);
-      let pares = Array.isArray(datos.pairs) ? datos.pairs : [];
+  if (!posiciones[simbolo]) {
+    posiciones[simbolo] = { cantidad: 0, costo: 0 };
+  }
 
-      if (red !== "all") {
-        pares = pares.filter(function(par) {
-          return String(par.chainId || "").toLowerCase() === red;
-        });
-      }
+  posiciones[simbolo].cantidad += cantidad;
+  posiciones[simbolo].costo += monto;
+  saldo -= monto;
 
-      pares.sort(function(a, b) {
-        return Number(b.liquidity?.usd || 0) -
-               Number(a.liquidity?.usd || 0);
-      });
-
-      if (!pares.length) {
-        salida.innerHTML = `
-          No se encontraron pares para esa búsqueda y red.
-          <p class="nota">
-            Prueba con el símbolo exacto o selecciona
-            "Todas las redes". No todos los tokens aparecen en
-            este servicio.
-          </p>
-        `;
-        return;
-      }
-
-      salida.innerHTML = pares.slice(0, 8).map(function(par) {
-        const nombre = escapar(
-          par.baseToken?.name || "Token desconocido"
-        );
-
-        const simbolo = escapar(
-          par.baseToken?.symbol || "?"
-        );
-
-        const redNombre = escapar(par.chainId || "Desconocida");
-        const precio = par.priceUsd ? dinero(Number(par.priceUsd)) : "No disponible";
-        const liquidez = Number(par.liquidity?.usd || 0);
-        const volumen = Number(par.volume?.h24 || 0);
-        const cambio = par.priceChange?.h24;
-        const cambioTexto = cambio === undefined ?
-          "No disponible" : porcentaje(Number(cambio));
-
-        const clase = Number(cambio) >= 0 ? "verde" : "rojo";
-        const enlace = String(par.url || "");
-        const enlaceSeguro = /^https:\/\/dexscreener\.com\//i.test(enlace)
-          ? enlace
-          : "";
-
-        return `
-          <div class="tarjeta">
-            <strong>${nombre} (${simbolo})</strong>
-            <div class="suave">Red: ${redNombre}</div>
-            <p>Precio: ${precio}</p>
-            <p>Liquidez aproximada: ${dinero(liquidez)}</p>
-            <p>Volumen 24 h: ${dinero(volumen)}</p>
-            <p>
-              Variación 24 h:
-              <strong class="${clase}">${escapar(cambioTexto)}</strong>
-            </p>
-            ${
-              enlaceSeguro
-                ? `<p><a href="${enlaceSeguro}" target="_blank" rel="noopener noreferrer">Ver par en DexScreener ↗</a></p>`
-                : ""
-            }
-            ${
-              liquidez < 10000
-                ? `<p class="rojo">⚠️ Liquidez baja: alto riesgo de no poder vender al precio esperado.</p>`
-                : ""
-            }
-          </div>
-        `;
-      }).join("");
-
-      salida.innerHTML += `
-        <p class="nota">
-          Resultados ordenados aproximadamente por liquidez.
-          La liquidez no demuestra que un proyecto sea legítimo.
-          Investiga el contrato y comprueba que puedas vender antes
-          de arriesgar dinero.
-        </p>
-      `;
-
-    } catch (error) {
-      salida.innerHTML = `
-        <strong class="rojo">No se pudo realizar la búsqueda.</strong>
-        <p>${mensajeError(error)}</p>
-        <p class="nota">
-          Puedes intentarlo otra vez o revisar tu conexión.
-        </p>
-      `;
-
-      throw error;
-    }
+  historial.push({
+    tipo: "compra",
+    simbolo,
+    monto,
+    precio
   });
+
+  actualizarSimulador();
+
+  porId("estadoSimulador").textContent =
+    "Compra ficticia registrada. No se compró ninguna criptomoneda real.";
 }
+
+function venderSimulado() {
+  const precio = Number(porId("precioSimulador").value);
+  const simbolo = String(
+    porId("tokenSimulador").value || ""
+  ).trim().toUpperCase();
+
+  if (!simbolo || !Number.isFinite(precio) || precio <= 0) {
+    porId("estadoSimulador").textContent =
+      "Introduce el símbolo y un precio válido.";
+    return;
+  }
+
+  const posicion = posiciones[simbolo];
+
+  if (!posicion || posicion.cantidad <= 0) {
+    porId("estadoSimulador").textContent =
+      "No tienes una posición ficticia de ese token.";
+    return;
+  }
+
+  const valorVenta = posicion.cantidad * precio;
+  const ganancia = valorVenta - posicion.costo;
+
+  saldo += valorVenta;
+
+  historial.push({
+    tipo: "venta",
+    simbolo,
+    monto: valorVenta,
+    precio,
+    ganancia
+  });
+
+  delete posiciones[simbolo];
+  actualizarSimulador();
+
+  porId("estadoSimulador").textContent =
+    `Venta ficticia registrada. Resultado: ${dinero(ganancia)}.`;
+}
+
+function actualizarSimulador() {
+  porId("saldoSimulador").textContent = dinero(saldo);
+
+  const resultado = historial.reduce((total, operacion) =>
+    total + (
+      operacion.tipo === "venta"
+        ? Number(operacion.ganancia || 0)
+        : 0
+    ), 0);
+
+  porId("resultadoSimulador").textContent = dinero(resultado);
+
+  porId("resultadoSimulador").className =
+    "numero " + (resultado >= 0 ? "verde" : "rojo");
+
+  const abiertas = Object.entries(posiciones);
+
+  porId("posicionesSimulador").innerHTML = abiertas.length
+    ? "<hr><h3>Posiciones ficticias abiertas</h3>" +
+      abiertas.map(([simbolo, p]) =>
+        `<p>${escapar(simbolo)}: ${numero(p.cantidad)} unidades · Costo ${dinero(p.costo)}</p>`
+      ).join("")
+    : '<p class="pequeno">No hay posiciones ficticias abiertas.</p>';
+}
+
+function usarEnSimulador(simbolo, precio) {
+  porId("tokenSimulador").value = simbolo;
+  porId("precioSimulador").value = precio || "";
+
+  porId("tokenSimulador").scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+
+  porId("estadoSimulador").textContent =
+    "Token copiado al simulador. Revisa el precio y el monto.";
+}
+
+function cambiarPausa() {
+  pausado = !pausado;
+
+  porId("btnPausa").textContent = pausado
+    ? "▶️ Reanudar actualizaciones"
+    : "⏸️ Pausar actualizaciones";
+
+  porId("estadoMensaje").textContent = pausado
+    ? "Actualizaciones automáticas pausadas."
+    : "Actualizaciones activas cada 60 segundos mientras la página esté abierta.";
+
+  porId("estadoGeneral").textContent =
+    pausado ? "En pausa" : "Preparado";
+}
+
+function iniciarActualizaciones() {
+  if (temporizador) clearInterval(temporizador);
+
+  temporizador = setInterval(() => {
+    if (!pausado && document.visibilityState === "visible") {
+      buscarOportunidades();
+    }
+  }, 60000);
+}
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible" && !pausado) {
+    porId("estadoMensaje").textContent =
+      "Página visible. Actualizaciones automáticas activas.";
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  iniciarSimulador();
+  iniciarActualizaciones();
+});
 </script>
 
 </body>
