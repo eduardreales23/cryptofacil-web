@@ -2,332 +2,81 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CryptoFácil</title>
 
 <style>
 :root {
-  --fondo: #080e1d;
-  --panel: #151f33;
-  --borde: #2b3853;
-  --verde: #24d6a0;
+  --fondo: #0b1020;
+  --panel: #151d32;
+  --borde: #293653;
   --texto: #f3f6ff;
-  --suave: #aebbd1;
-  --rojo: #ff6b79;
+  --suave: #aebbd4;
+  --verde: #38e59b;
+  --azul: #63a7ff;
+  --rojo: #ff7777;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
-  padding: 20px 14px 45px;
+  padding: 16px;
   background: var(--fondo);
   color: var(--texto);
   font-family: Arial, sans-serif;
 }
-
-header {
-  text-align: center;
-  padding: 20px 0 25px;
-}
-
-header h1 {
-  color: var(--verde);
-  font-size: 35px;
-  margin: 8px 0;
-}
-
-header p { color: var(--suave); }
 
 .contenedor {
   max-width: 720px;
   margin: auto;
 }
 
+header {
+  text-align: center;
+  padding: 15px 0 20px;
+}
+
+.logo {
+  font-size: 42px;
+}
+
+h1 {
+  margin: 8px 0;
+  font-size: 30px;
+}
+
+header p {
+  color: var(--suave);
+  line-height: 1.5;
+}
+
 .panel {
   background: var(--panel);
   border: 1px solid var(--borde);
-  border-radius: 20px;
-  padding: 20px;
-  margin-bottom: 18px;
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 15px;
 }
 
-h2 { font-size: 22px; margin-top: 0; }
+h2 {
+  font-size: 19px;
+  margin-top: 0;
+}
 
 label {
   display: block;
-  margin: 15px 0 8px;
+  margin: 14px 0 7px;
   color: var(--suave);
+  font-size: 14px;
 }
 
 select, input {
   width: 100%;
-  padding: 14px;
-  border: 1px solid var(--borde);
-  border-radius: 12px;
-  background: #0b1324;
-  color: white;
-  font-size: 16px;
-  margin-bottom: 12px;
-}
-
-button {
-  width: 100%;
-  border: none;
-  border-radius: 12px;
-  padding: 15px 12px;
-  margin: 7px 0;
-  background: #078460;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform .12s, background .2s;
-  -webkit-tap-highlight-color: transparent;
-}
-
-button:active {
-  transform: scale(.97);
-  background: #045b43;
-}
-
-button:disabled {
-  opacity: .65;
-  cursor: wait;
-}
-
-button.secundario { background: #293954; }
-
-button:focus-visible, select:focus-visible,
-input:focus-visible {
-  outline: 2px solid var(--verde);
-}
-
-.precio {
-  color: var(--verde);
-  font-size: 30px;
-  font-weight: bold;
-  margin: 20px 0 8px;
-  overflow-wrap: anywhere;
-}
-
-.estado {
   padding: 13px;
-  border-radius: 10px;
-  background: #202d45;
-  color: var(--suave);
-  line-height: 1.5;
-  margin-top: 12px;
-  overflow-wrap: anywhere;
-}
-
-.estado.ok { color: var(--verde); }
-.estado.error { color: #ff9da6; }
-
-.pequeno {
-  color: var(--suave);
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.resultado {
-  padding: 14px;
-  background: #0d1729;
-  border-radius: 12px;
-  margin-top: 12px;
-  line-height: 1.7;
-  overflow-wrap: anywhere;
-}
-
-.resultado a { color: var(--verde); }
-
-.tarjeta {
   border: 1px solid var(--borde);
-  padding: 14px;
-  border-radius: 12px;
-  margin: 10px 0;
-}
-
-.tarjeta strong { color: var(--verde); }
-
-a { overflow-wrap: anywhere; }
-</style>
-</head>
-
-<body>
-<div class="contenedor">
-
-<header>
-  <h1>🚀 CryptoFácil</h1>
-  <p>Tu asistente de análisis de criptomonedas</p>
-  <p class="pequeno">Información de mercado y evaluación de oportunidades.</p>
-</header>
-
-<section class="panel">
-  <h2>💰 Mercado en vivo</h2>
-
-  <label for="moneda">Selecciona una criptomoneda</label>
-
-  <select id="moneda">
-    <option value="bitcoin">Bitcoin (BTC)</option>
-    <option value="ethereum">Ethereum (ETH)</option>
-    <option value="solana">Solana (SOL)</option>
-    <option value="binancecoin">BNB</option>
-    <option value="ripple">XRP</option>
-    <option value="dogecoin">Dogecoin (DOGE)</option>
-    <option value="the-open-network">Toncoin (TON)</option>
-    <option value="avalanche-2">Avalanche (AVAX)</option>
-    <option value="chainlink">Chainlink (LINK)</option>
-    <option value="sui">Sui (SUI)</option>
-    <option value="pepe">Pepe (PEPE)</option>
-  </select>
-
-  <button id="btnPrecio" onclick="consultarPrecio()">
-    🔄 Consultar precio
-  </button>
-
-  <div id="precio" class="precio">Listo para consultar</div>
-  <div id="estadoPrecio" class="estado" role="status" aria-live="polite">
-    Pulsa el botón para consultar el mercado.
-  </div>
-</section>
-
-<section class="panel">
-  <h2>📊 Analizador de mercado</h2>
-
-  <p class="pequeno">
-    Consulta el precio y su variación en 24 horas para evaluar
-    posibles escenarios de entrada o salida.
-  </p>
-
-  <button id="btnAnalisis" onclick="analizar()">
-    📈 Analizar moneda seleccionada
-  </button>
-
-  <div id="resultadoAnalisis" class="resultado" aria-live="polite">
-    El análisis aparecerá aquí.
-  </div>
-</section>
-
-<section class="panel">
-  <h2>🔎 Buscar proyectos nuevos</h2>
-
-  <p class="pequeno">
-    Busca pares de criptomonedas y explora proyectos que cotizan
-    en mercados descentralizados.
-  </p>
-
-  <label for="busqueda">Nombre o símbolo del proyecto</label>
-  <input id="busqueda" placeholder="Ejemplo: gaming, PEPE, SOL">
-
-  <button id="btnBuscar" onclick="buscarProyectos()">
-    🔍 Buscar proyectos
-  </button>
-
-  <div id="resultadoBusqueda" aria-live="polite">
-    <div class="estado">Escribe un nombre o símbolo para comenzar.</div>
-  </div>
-</section>
-
-<section class="panel">
-  <h2>🌐 Redes compatibles</h2>
-
-  <p class="pequeno">
-    Selecciona una red para consultar pares disponibles.
-    La disponibilidad depende de los datos publicados por cada mercado.
-  </p>
-
-  <select id="red">
-    <option value="solana">Solana</option>
-    <option value="base">Base</option>
-    <option value="bsc">BNB Chain</option>
-    <option value="ethereum">Ethereum</option>
-    <option value="hyperevm">Robinhood Chain: verificar disponibilidad</option>
-  </select>
-
-  <button id="btnRed" onclick="buscarRed()">
-    🌐 Explorar esta red
-  </button>
-
-  <div id="resultadoRed" aria-live="polite">
-    <div class="estado">Selecciona una red para comenzar.</div>
-  </div>
-</section>
-
-<section class="panel">
-  <h2>🛡️ Antes de invertir</h2>
-
-  <div class="resultado">
-    <strong>Importante</strong><br>
-    Una subida rápida no garantiza que el precio siga subiendo.
-    Las criptomonedas nuevas pueden perder casi todo su valor.
-    Comprueba la liquidez, la distribución de los tokens,
-    el contrato y los riesgos antes de invertir.
-  </div>
-
-  <p class="pequeno">
-    Esta página consulta información pública. No ejecuta compras,
-    no vende activos y no tiene acceso a tu billetera.
-    Los resultados no garantizan ganancias.
-  </p>
-</section>
-
-<footer class="pequeno" style="text-align:center">
-  CryptoFácil · Datos públicos de CoinGecko y DexScreener
-</footer>
-
-</div>
-
-<script>
-const API_CG = "https://api.coingecko.com/api/v3";
-const API_DEX = "https://api.dexscreener.com/latest/dex";
-
-const nombres = {
-  bitcoin: "Bitcoin",
-  ethereum: "Ethereum",
-  solana: "Solana",
-  binancecoin: "BNB",
-  ripple: "XRP",
-  dogecoin: "Dogecoin",
-  "the-open-network": "Toncoin",
-  "avalanche-2": "Avalanche",
-  chainlink: "Chainlink",
-  sui: "Sui",
-  pepe: "Pepe"
-};
-
-function dinero(valor) {
-  if (valor === null || valor === undefined || !Number.isFinite(Number(valor))) {
-    return "No disponible";
-  }
-
-  return Number(valor).toLocaleString("es-CO", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: Number(valor) < 1 ? 8 : 2
-  });
-}
-
-function numero(valor) {
-  if (valor === null || valor === undefined || !Number.isFinite(Number(valor))) {
-    return "No disponible";
-  }
-
-  return Number(valor).toLocaleString("es-CO", {
-    maximumFractionDigits: 2
-  });
-}
-
-function estado(id, mensaje, tipo = "") {
-  const elemento = document.getElementById(id);
-  elemento.className = "estado " + tipo;
-  elemento.textContent = mensaje;
-}
-
-function resultado(id, html) {
-  document.getElementById(id).innerHTML = html;
-}
-
-async function ejecutarBoton(id, texto, trabajo) {
-  const boton = document.getElementById(id);
- 
+  border-radius: 10px;
+  background: #0c1427;
+  color: white
