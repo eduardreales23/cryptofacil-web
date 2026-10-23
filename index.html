@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CryptoFácil</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b1020;color:#f1f5f9;font-family:Arial,sans-serif;padding:16px}
+header{text-align:center;padding:18px 0}
+h1{color:#36e0a1;margin-bottom:6px}
+.sub{color:#9ca3af;font-size:14px}
+.card{background:#151d30;border:1px solid #27334c;border-radius:15px;padding:16px;margin:14px 0}
+h2{font-size:18px;margin-top:0}
+button,select,input{width:100%;padding:13px;border-radius:9px;border:1px solid #334155;background:#0b1222;color:white;font-size:15px;margin:6px 0}
+button{background:#087f5b;border:0;font-weight:bold}
+button.secondary{background:#26344e}
+.price{font-size:28px;font-weight:bold;color:#36e0a1}
+.muted{color:#a7b1c5;font-size:13px;line-height:1.5}
+.signal{font-weight:bold;padding:10px;border-radius:8px;background:#243047;margin:10px 0}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.badge{color:#36e0a1}
+footer{text-align:center;color:#8290a8;font-size:12px;padding:20px}
+</style>
+</head>
+<body>
+<header>
+<h1>🚀 CryptoFácil</h1>
+<div class="sub">Tu asistente de análisis de criptomonedas</div>
+</header>
+
+<div class="card">
+<h2>💰 Mercado en vivo</h2>
+<label for="coin">Selecciona una criptomoneda</label>
+<select id="coin">
+<option value="bitcoin">Bitcoin (BTC)</option>
+<option value="ethereum">Ethereum (ETH)</option>
+<option value="solana">Solana (SOL)</option>
+<option value="binancecoin">BNB</option>
+<option value="ripple">XRP</option>
+<option value="dogecoin">Dogecoin (DOGE)</option>
+</select>
+<div id="price" class="price">Cargando...</div>
+<div id="change" class="muted">Consultando el mercado...</div>
+<button onclick="loadPrice()">🔄 Actualizar precio</button>
+<div class="muted">Datos públicos de CoinGecko. La conexión puede estar limitada por el proveedor.</div>
+</div>
+
+<div class="card">
+<h2>📊 Analizador básico</h2>
+<p class="muted">Este análisis utiliza variaciones de precio y no garantiza resultados futuros.</p>
+<button onclick="analyze()">Analizar moneda seleccionada</button>
+<div id="analysis" class="signal">Pulsa analizar para consultar los datos disponibles.</div>
+<div id="details" class="muted"></div>
+</div>
+
+<div class="card">
+<h2>🔎 Buscar proyectos nuevos</h2>
+<p class="muted">Consulta criptomonedas con alta variación y revisa su capitalización antes de considerar una operación.</p>
+<button class="secondary" onclick="newCoins()">Ver proyectos y capitalización</button>
+<div id="projects" class="muted">Pulsa el botón para cargar datos públicos.</div>
+</div>
+
+<div class="card">
+<h2>🌐 Redes compatibles con la exploración</h2>
+<div class="row">
+<div>🟣 Solana</div><div>🔵 Base</div>
+<div>🟡 BNB Chain</div><div>💎 Ethereum</div>
+</div>
+<p class="muted">Robinhood Chain: verifica la disponibilidad de datos, red y herramientas antes de operar. Esta versión no conecta una billetera ni ejecuta transacciones.</p>
+</div>
+
+<div class="card">
+<h2>🛡️ Reglas de seguridad</h2>
+<p class="muted">
+• No inviertas dinero que necesites.<br>
+• Comprueba la liquidez y el volumen.<br>
+• Desconfía de promesas de ganancias garantizadas.<br>
+• Define tu pérdida máxima antes de entrar.<br>
+• Verifica el contrato del token y evita enlaces desconocidos.
+</p>
+</div>
+
+<footer>CryptoFácil · Herramienta educativa · No garantiza ganancias</footer>
+
+<script>
+const API="https://api.coingecko.com/api/v3";
+let current=null;
+
+async function fetchJSON(url){
+ const r=await fetch(url);
+ if(!r.ok) throw new Error("El proveedor limitó o rechazó la consulta.");
+ return await r.json();
+}
+
+function usd(n){
+ return new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:n<1?8:2}).format(n);
+}
+
+async function loadPrice(){
+ const id=document.getElementById("coin").value;
+ document.getElementById("price").textContent="
