@@ -79,4 +79,616 @@ select, input {
   border: 1px solid var(--borde);
   border-radius: 10px;
   background: #0c1427;
-  color: white
+  color: white;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 10px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--verde);
+  color: #07180f;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button.secundario {
+  background: #263956;
+  color: white;
+}
+
+button:disabled {
+  opacity: .65;
+  cursor: wait;
+}
+
+.resultado {
+  margin-top: 14px;
+  padding: 14px;
+  background: #0c1427;
+  border-radius: 10px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.precio {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 8px 0;
+}
+
+.verde {
+  color: var(--verde);
+}
+
+.rojo {
+  color: var(--rojo);
+}
+
+.suave {
+  color: var(--suave);
+}
+
+.tarjeta {
+  padding: 13px;
+  margin-top: 10px;
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  line-height: 1.5;
+}
+
+a {
+  color: var(--azul);
+  overflow-wrap: anywhere;
+}
+
+.nota {
+  color: var(--suave);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.estado {
+  font-size: 14px;
+  margin-top: 10px;
+  color: var(--suave);
+}
+
+footer {
+  text-align: center;
+  color: var(--suave);
+  font-size: 12px;
+  padding: 12px;
+}
+
+</style>
+</head>
+
+<body>
+<div class="contenedor">
+
+<header>
+  <div class="logo">🚀</div>
+  <h1>CryptoFácil</h1>
+  <p>
+    Aprende a analizar criptomonedas, descubrir proyectos
+    y estudiar posibles oportunidades de mercado.
+  </p>
+</header>
+
+<section class="panel">
+  <h2>💰 1. Consultar precio</h2>
+
+  <label for="moneda">Selecciona una criptomoneda</label>
+  <select id="moneda">
+    <option value="bitcoin">Bitcoin (BTC)</option>
+    <option value="ethereum">Ethereum (ETH)</option>
+    <option value="solana">Solana (SOL)</option>
+    <option value="binancecoin">BNB</option>
+    <option value="ripple">XRP</option>
+    <option value="dogecoin">Dogecoin (DOGE)</option>
+    <option value="the-open-network">Toncoin (TON)</option>
+    <option value="avalanche-2">Avalanche (AVAX)</option>
+    <option value="chainlink">Chainlink (LINK)</option>
+    <option value="sui">Sui (SUI)</option>
+  </select>
+
+  <button id="btnPrecio" onclick="consultarPrecio()">
+    Consultar precio
+  </button>
+
+  <div id="resultadoPrecio" class="resultado">
+    Selecciona una moneda y pulsa consultar.
+  </div>
+</section>
+
+<section class="panel">
+  <h2>📊 2. Analizar una moneda</h2>
+
+  <p class="suave">
+    Consulta el precio, la variación diaria y el volumen para
+    comenzar a evaluar el comportamiento del mercado.
+  </p>
+
+  <button id="btnAnalisis" class="secundario"
+    onclick="analizarMoneda()">
+    Analizar mercado
+  </button>
+
+  <div id="resultadoAnalisis" class="resultado">
+    El análisis aparecerá aquí.
+  </div>
+</section>
+
+<section class="panel">
+  <h2>🔎 3. Buscar nuevos proyectos</h2>
+
+  <label for="busqueda">Nombre o símbolo del token</label>
+  <input id="busqueda"
+    type="text"
+    placeholder="Ejemplo: BONK, PEPE, gaming..."
+    maxlength="100">
+
+  <label for="red">Red blockchain</label>
+  <select id="red">
+    <option value="all">Todas las redes</option>
+    <option value="solana">Solana</option>
+    <option value="base">Base</option>
+    <option value="bsc">BNB Chain</option>
+    <option value="ethereum">Ethereum</option>
+    <option value="arbitrum">Arbitrum</option>
+    <option value="optimism">Optimism</option>
+    <option value="polygon">Polygon</option>
+    <option value="hyperevm">HyperEVM</option>
+  </select>
+
+  <button id="btnBuscar" onclick="buscarProyectos()">
+    Buscar proyectos
+  </button>
+
+  <div id="resultadoBusqueda" class="resultado">
+    Aquí aparecerán los proyectos encontrados.
+  </div>
+
+  <p class="nota">
+    Robinhood Chain no está disponible como filtro independiente
+    en esta versión. HyperEVM es una red diferente: no la
+    selecciones como si fuera Robinhood Chain.
+  </p>
+</section>
+
+<section class="panel">
+  <h2>🎓 4. Aprende a evaluar una oportunidad</h2>
+
+  <div class="tarjeta">
+    <strong>💧 Liquidez</strong>
+    <p class="suave">
+      Comprueba si existe suficiente liquidez para comprar y vender.
+      Una liquidez baja puede dificultar la salida de una operación.
+    </p>
+  </div>
+
+  <div class="tarjeta">
+    <strong>📈 Volumen</strong>
+    <p class="suave">
+      Compara el volumen de negociación con la liquidez y observa
+      si hay actividad real en el mercado.
+    </p>
+  </div>
+
+  <div class="tarjeta">
+    <strong>🛡️ Riesgo del contrato</strong>
+    <p class="suave">
+      Investiga si el contrato permite restricciones de venta,
+      cambios de comisiones u otras funciones peligrosas.
+      Un resultado favorable no garantiza que un token sea seguro.
+    </p>
+  </div>
+
+  <div class="tarjeta">
+    <strong>🚪 Plan de salida</strong>
+    <p class="suave">
+      Antes de comprar, define cuánto estás dispuesto a perder
+      y en qué condiciones cerrarías la operación.
+    </p>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>ℹ️ Estado de CryptoFácil</h2>
+  <div id="estadoGeneral" class="estado">
+    Preparado para consultar datos.
+  </div>
+  <p class="nota">
+    Los datos dependen de servicios externos y de tu conexión.
+    Esta herramienta es educativa: no garantiza beneficios,
+    no calcula una probabilidad fiable de ganar y no ejecuta
+    compras ni ventas reales.
+  </p>
+</section>
+
+<footer>
+  CryptoFácil · Herramienta educativa de criptomonedas
+</footer>
+
+</div>
+
+<script>
+const API_CG = "https://api.coingecko.com/api/v3";
+const API_DEX = "https://api.dexscreener.com/latest/dex";
+
+function elemento(id) {
+  return document.getElementById(id);
+}
+
+function escapar(texto) {
+  return String(texto ?? "").replace(/[&<>"']/g, function(c) {
+    return {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[c];
+  });
+}
+
+function dinero(valor) {
+  if (valor === null || valor === undefined || !Number.isFinite(Number(valor))) {
+    return "No disponible";
+  }
+
+  return Number(valor).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: Number(valor) < 1 ? 8 : 2
+  });
+}
+
+function numero(valor) {
+  if (valor === null || valor === undefined || !Number.isFinite(Number(valor))) {
+    return "No disponible";
+  }
+
+  return Number(valor).toLocaleString("en-US", {
+    maximumFractionDigits: 2
+  });
+}
+
+function porcentaje(valor) {
+  if (valor === null || valor === undefined || !Number.isFinite(Number(valor))) {
+    return "No disponible";
+  }
+
+  const n = Number(valor);
+  const signo = n > 0 ? "+" : "";
+
+  return signo + n.toFixed(2) + "%";
+}
+
+async function obtenerJSON(url, tiempo = 10000) {
+  const controlador = new AbortController();
+  const temporizador = setTimeout(
+    () => controlador.abort(),
+    tiempo
+  );
+
+  try {
+    const respuesta = await fetch(url, {
+      method: "GET",
+      cache: "no-store",
+      signal: controlador.signal,
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+
+    if (!respuesta.ok) {
+      if (respuesta.status === 429) {
+        throw new Error(
+          "El servicio está recibiendo muchas consultas. Espera un minuto."
+        );
+      }
+
+      throw new Error(
+        "El servicio respondió con error HTTP " + respuesta.status + "."
+      );
+    }
+
+    return await respuesta.json();
+
+  } catch (error) {
+    if (error.name === "AbortError") {
+      throw new Error(
+        "La consulta tardó demasiado. Comprueba tu conexión e inténtalo otra vez."
+      );
+    }
+
+    throw error;
+
+  } finally {
+    clearTimeout(temporizador);
+  }
+}
+
+function mensajeError(error) {
+  return escapar(error?.message || "No se pudo completar la consulta.");
+}
+
+async function conBoton(id, texto, funcion) {
+  const boton = elemento(id);
+  const original = boton.textContent;
+
+  if (boton.disabled) return;
+
+  boton.disabled = true;
+  boton.textContent = "⏳ Consultando...";
+
+  elemento("estadoGeneral").textContent =
+    "Consultando el servicio de datos...";
+
+  try {
+    await funcion();
+
+    elemento("estadoGeneral").textContent =
+      "Consulta finalizada.";
+
+  } catch (error) {
+    console.error(error);
+
+    elemento("estadoGeneral").textContent =
+      "No se pudo completar la consulta.";
+
+  } finally {
+    boton.disabled = false;
+    boton.textContent = original;
+  }
+}
+
+async function consultarPrecio() {
+  await conBoton("btnPrecio", "Consultar precio", async function() {
+    const id = elemento("moneda").value;
+    const salida = elemento("resultadoPrecio");
+
+    salida.innerHTML = "Buscando precio...";
+
+    try {
+      const url = API_CG +
+        "/simple/price?ids=" + encodeURIComponent(id) +
+        "&vs_currencies=usd&include_24hr_change=true";
+
+      const datos = await obtenerJSON(url);
+      const moneda = datos[id];
+
+      if (!moneda || moneda.usd === undefined) {
+        throw new Error("No se recibió el precio de esta moneda.");
+      }
+
+      const cambio = moneda.usd_24h_change;
+      const clase = Number(cambio) >= 0 ? "verde" : "rojo";
+
+      salida.innerHTML = `
+        <div class="suave">Precio actual aproximado</div>
+        <div class="precio">${dinero(moneda.usd)}</div>
+        <div>
+          Variación de 24 horas:
+          <strong class="${clase}">
+            ${porcentaje(cambio)}
+          </strong>
+        </div>
+        <p class="nota">
+          Datos de CoinGecko. El precio puede cambiar rápidamente.
+        </p>
+      `;
+
+    } catch (error) {
+      salida.innerHTML = `
+        <strong class="rojo">No se pudo consultar el precio.</strong>
+        <p>${mensajeError(error)}</p>
+        <p class="nota">
+          Si el servicio limita las consultas, espera un poco
+          antes de intentarlo de nuevo.
+        </p>
+      `;
+
+      throw error;
+    }
+  });
+}
+
+async function analizarMoneda() {
+  await conBoton("btnAnalisis", "Analizar mercado", async function() {
+    const id = elemento("moneda").value;
+    const salida = elemento("resultadoAnalisis");
+
+    salida.innerHTML = "Analizando datos del mercado...";
+
+    try {
+      const url = API_CG +
+        "/coins/markets?vs_currency=usd&ids=" +
+        encodeURIComponent(id) +
+        "&price_change_percentage=24h";
+
+      const datos = await obtenerJSON(url);
+
+      if (!Array.isArray(datos) || !datos.length) {
+        throw new Error("No hay datos de mercado disponibles.");
+      }
+
+      const moneda = datos[0];
+      const cambio = Number(moneda.price_change_percentage_24h);
+      const volumen = Number(moneda.total_volume || 0);
+      const capitalizacion = Number(moneda.market_cap || 0);
+
+      let lectura = "Movimiento mixto o sin datos suficientes.";
+
+      if (Number.isFinite(cambio) && cambio >= 3) {
+        lectura = "Movimiento positivo durante las últimas 24 horas. Revisa si el precio ya subió demasiado.";
+      } else if (Number.isFinite(cambio) && cambio > 0) {
+        lectura = "Subida moderada durante las últimas 24 horas. Confirma la tendencia antes de decidir.";
+      } else if (Number.isFinite(cambio) && cambio <= -3) {
+        lectura = "Caída importante durante las últimas 24 horas. Puede implicar un riesgo elevado.";
+      } else if (Number.isFinite(cambio) && cambio < 0) {
+        lectura = "Movimiento negativo durante las últimas 24 horas. Busca más contexto antes de operar.";
+      }
+
+      const clase = cambio >= 0 ? "verde" : "rojo";
+
+      salida.innerHTML = `
+        <h3>${escapar(moneda.name)} (${escapar(moneda.symbol.toUpperCase())})</h3>
+        <div class="precio">${dinero(moneda.current_price)}</div>
+
+        <p>
+          Variación 24 h:
+          <strong class="${clase}">${porcentaje(cambio)}</strong>
+        </p>
+
+        <p>Capitalización: ${dinero(capitalizacion)}</p>
+        <p>Volumen 24 h: ${dinero(volumen)}</p>
+        <p>Rango del día: ${dinero(moneda.low_24h)} – ${dinero(moneda.high_24h)}</p>
+
+        <div class="tarjeta">
+          <strong>Lectura inicial</strong>
+          <p>${escapar(lectura)}</p>
+        </div>
+
+        <p class="nota">
+          Esta lectura utiliza principalmente la variación diaria.
+          No es una señal fiable de compra o venta ni una predicción
+          de rentabilidad.
+        </p>
+      `;
+
+    } catch (error) {
+      salida.innerHTML = `
+        <strong class="rojo">No se pudo completar el análisis.</strong>
+        <p>${mensajeError(error)}</p>
+      `;
+
+      throw error;
+    }
+  });
+}
+
+async function buscarProyectos() {
+  await conBoton("btnBuscar", "Buscar proyectos", async function() {
+    const consulta = elemento("busqueda").value.trim();
+    const red = elemento("red").value;
+    const salida = elemento("resultadoBusqueda");
+
+    if (!consulta) {
+      salida.innerHTML =
+        "Escribe el nombre o símbolo del token que quieres buscar.";
+      return;
+    }
+
+    salida.innerHTML = "Buscando pares de mercado...";
+
+    try {
+      const url = API_DEX + "/search?q=" +
+        encodeURIComponent(consulta);
+
+      const datos = await obtenerJSON(url, 12000);
+      let pares = Array.isArray(datos.pairs) ? datos.pairs : [];
+
+      if (red !== "all") {
+        pares = pares.filter(function(par) {
+          return String(par.chainId || "").toLowerCase() === red;
+        });
+      }
+
+      pares.sort(function(a, b) {
+        return Number(b.liquidity?.usd || 0) -
+               Number(a.liquidity?.usd || 0);
+      });
+
+      if (!pares.length) {
+        salida.innerHTML = `
+          No se encontraron pares para esa búsqueda y red.
+          <p class="nota">
+            Prueba con el símbolo exacto o selecciona
+            "Todas las redes". No todos los tokens aparecen en
+            este servicio.
+          </p>
+        `;
+        return;
+      }
+
+      salida.innerHTML = pares.slice(0, 8).map(function(par) {
+        const nombre = escapar(
+          par.baseToken?.name || "Token desconocido"
+        );
+
+        const simbolo = escapar(
+          par.baseToken?.symbol || "?"
+        );
+
+        const redNombre = escapar(par.chainId || "Desconocida");
+        const precio = par.priceUsd ? dinero(Number(par.priceUsd)) : "No disponible";
+        const liquidez = Number(par.liquidity?.usd || 0);
+        const volumen = Number(par.volume?.h24 || 0);
+        const cambio = par.priceChange?.h24;
+        const cambioTexto = cambio === undefined ?
+          "No disponible" : porcentaje(Number(cambio));
+
+        const clase = Number(cambio) >= 0 ? "verde" : "rojo";
+        const enlace = String(par.url || "");
+        const enlaceSeguro = /^https:\/\/dexscreener\.com\//i.test(enlace)
+          ? enlace
+          : "";
+
+        return `
+          <div class="tarjeta">
+            <strong>${nombre} (${simbolo})</strong>
+            <div class="suave">Red: ${redNombre}</div>
+            <p>Precio: ${precio}</p>
+            <p>Liquidez aproximada: ${dinero(liquidez)}</p>
+            <p>Volumen 24 h: ${dinero(volumen)}</p>
+            <p>
+              Variación 24 h:
+              <strong class="${clase}">${escapar(cambioTexto)}</strong>
+            </p>
+            ${
+              enlaceSeguro
+                ? `<p><a href="${enlaceSeguro}" target="_blank" rel="noopener noreferrer">Ver par en DexScreener ↗</a></p>`
+                : ""
+            }
+            ${
+              liquidez < 10000
+                ? `<p class="rojo">⚠️ Liquidez baja: alto riesgo de no poder vender al precio esperado.</p>`
+                : ""
+            }
+          </div>
+        `;
+      }).join("");
+
+      salida.innerHTML += `
+        <p class="nota">
+          Resultados ordenados aproximadamente por liquidez.
+          La liquidez no demuestra que un proyecto sea legítimo.
+          Investiga el contrato y comprueba que puedas vender antes
+          de arriesgar dinero.
+        </p>
+      `;
+
+    } catch (error) {
+      salida.innerHTML = `
+        <strong class="rojo">No se pudo realizar la búsqueda.</strong>
+        <p>${mensajeError(error)}</p>
+        <p class="nota">
+          Puedes intentarlo otra vez o revisar tu conexión.
+        </p>
+      `;
+
+      throw error;
+    }
+  });
+}
+</script>
+
+</body>
+</html>
